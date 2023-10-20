@@ -31,7 +31,7 @@ import cpw.mods.fml.common.gameevent.TickEvent.PlayerTickEvent;
 public class InventoryManager
 {
 
-    LoadingCache<UUID, InventoryCosArmor> cache = CacheBuilder.newBuilder().build(new CacheLoader<UUID, InventoryCosArmor>()
+    static LoadingCache<UUID, InventoryCosArmor> cache = CacheBuilder.newBuilder().build(new CacheLoader<UUID, InventoryCosArmor>()
     {
 
         @Override
@@ -57,7 +57,7 @@ public class InventoryManager
 
     });
 
-    void forceLoad(UUID uuid, InventoryCosArmor inv) throws IOException
+    static void forceLoad(UUID uuid, InventoryCosArmor inv) throws IOException
     {
         try
         {
@@ -85,12 +85,12 @@ public class InventoryManager
         throw new UnsupportedOperationException();
     }
 
-    File getDataFile(UUID uuid)
+    static File getDataFile(UUID uuid)
     {
         return new File(new File(getSavesDirectory(), "playerdata"), uuid + ".cosarmor");
     }
 
-    File getSavesDirectory()
+    static File getSavesDirectory()
     {
         MinecraftServer server = FMLCommonHandler.instance().getMinecraftServerInstance();
         if (FMLCommonHandler.instance().getSide().isClient())
@@ -248,5 +248,4 @@ public class InventoryManager
             }
         }
     }
-
 }
